@@ -1,0 +1,55 @@
+name: Rust
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  check:
+    name: Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@stable
+      - name: Check
+        run: |
+          cargo check
+          cargo check --features si7013
+
+  check-async:
+    name: Check async
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install nightly Rust
+        uses: dtolnay/rust-toolchain@nightly
+      - name: Check
+        run: |
+          cargo check
+          cargo check --features async
+  fmt:
+    name: Rustfmt
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: rustfmt
+      - name: Format
+        run: cargo fmt --all -- --check
+
+  clippy:
+    name: Clippy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Install stable Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+      - name: Format
+        run: cargo clippy -- -D warnings

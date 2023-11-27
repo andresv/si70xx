@@ -1,0 +1,23 @@
+[package]
+name = "si70xx"
+version = "0.1.0"
+edition = "2021"
+authors = ["Andres Vahter <andres@vahter.me>"]
+repository = "https://github.com/andresv/si70xx.git"
+description = "Si70xx series relative humidity and temperature sensor driver"
+keywords = ["embedded", "driver", "embedded-hal-driver", "si7006","si7013", "si7020", "si7021", "iot", "temperature", "humidity"]
+categories = ["embedded", "hardware-support", "no-std"]
+license = "MIT OR Apache-2.0"
+readme = "README.md"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[features]
+default = []
+async = ["dep:embedded-hal-async"]
+# This version supports 0x40 or 0x41 as I2C address.
+si7013 = []
+
+[dependencies]
+embedded-hal = "1.0.0-rc.1"
+embedded-hal-async = { version = "=1.0.0-rc.1", optional = true }
