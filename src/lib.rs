@@ -94,7 +94,7 @@ pub enum Error<E> {
 #[allow(dead_code)]
 #[derive(PartialEq)]
 enum Command {
-    MeasureRh = 0xF5,
+    MeasureRhHoldMaster = 0xE5,
     ReadTemperatureFromRh = 0xE0,
 }
 
@@ -135,7 +135,7 @@ where
     #[cfg(not(feature = "async"))]
     pub fn measure(&mut self) -> Result<(), Error<E>> {
         self.i2c
-            .write(self.addr, &[Command::MeasureRh as u8])
+            .write(self.addr, &[Command::MeasureRhHoldMaster as u8])
             .map_err(Error::I2c)?;
         Ok(())
     }
@@ -150,7 +150,7 @@ where
     #[cfg(feature = "async")]
     pub async fn measure(&mut self) -> Result<(), Error<E>> {
         self.i2c
-            .write(self.addr, &[Command::MeasureRh as u8])
+            .write(self.addr, &[Command::MeasureRhHoldMaster as u8])
             .await
             .map_err(Error::I2c)?;
         Ok(())
