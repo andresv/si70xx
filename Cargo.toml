@@ -1,6 +1,6 @@
 [package]
 name = "si70xx"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 authors = ["Andres Vahter <andres@vahter.me>"]
 repository = "https://github.com/andresv/si70xx.git"
@@ -19,5 +19,5 @@ async = ["dep:embedded-hal-async"]
 si7013 = []
 
 [dependencies]
-embedded-hal = "1.0.0-rc.1"
-embedded-hal-async = { version = "=1.0.0-rc.1", optional = true }
+embedded-hal = "1.0.0-rc.3"
+embedded-hal-async = { version = "=1.0.0-rc.3", optional = true }
